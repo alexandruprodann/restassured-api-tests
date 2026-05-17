@@ -4,7 +4,6 @@ import com.apiautomation.base.BaseTest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -16,80 +15,124 @@ public class UserTests extends BaseTest {
     public void getUserById() {
         given()
         .when()
-                .get("/users/2")
+            .get("/users/2")
         .then()
-                .statusCode(200)
-                .body("data.id", equalTo(2))
-                .body("data.first_name", equalTo("Janet"))
-                .body("data.last_name", equalTo("Weaver"))
-                .body("data.email", notNullValue());
+            .statusCode(200)
+            .body("data.id", equalTo(2))
+            .body("data.first_name", equalTo("Janet"))
+            .body("data.last_name", equalTo("Weaver"))
+            .body("data.email", notNullValue());
     }
 
     @Test
     public void getUserNotFound() {
         given()
         .when()
-                .get("/users/999")
+            .get("/users/999")
         .then()
-                .statusCode(404);
+            .statusCode(404);
     }
 
     @Test
     public void getUsersList() {
         given()
-                .queryParam("page", 2)
+            .queryParam("page", 2)
         .when()
-                .get("/users")
+            .get("/users")
         .then()
-                .statusCode(200)
-                .body("page", equalTo(2))
-                .body("data", not(empty()))
-                .body("data.first_name", hasItem("Lindsay"));
+            .statusCode(200)
+            .body("page", equalTo(2))
+            .body("data", not(empty()))
+            .body("data.first_name", hasItem("Lindsay"));
     }
 
     @Test
     public void createUser() {
-        Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("name", "Alex");
-        requestBody.put("job", "QA Engineer");
+        Map<String, Object> requestBody = Map.of(
+                "name", "Alex",
+                "job", "QA Engineer"
+        );
 
         given()
-                .contentType(ContentType.JSON)
-                .body(requestBody)
+            .contentType(ContentType.JSON)
+            .body(requestBody)
         .when()
-                .post("/users")
+            .post("/users")
         .then()
-                .statusCode(201)
-                .body("name", equalTo("Alex"))
-                .body("job", equalTo("QA Engineer"))
-                .body("id", notNullValue())
-                .body("createdAt", notNullValue());
+            .statusCode(201)
+            .body("name", equalTo("Alex"))
+            .body("job", equalTo("QA Engineer"))
+            .body("id", notNullValue())
+            .body("createdAt", notNullValue());
     }
 
     @Test
     public void updateUser() {
-        Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("name", "Alex Updated");
-        requestBody.put("job", "Senior QA Engineer");
+        Map<String, Object> requestBody = Map.of(
+                "name", "Alex Updated",
+                "job", "Senior QA Engineer"
+        );
 
         given()
-                .contentType(ContentType.JSON)
-                .body(requestBody)
+            .contentType(ContentType.JSON)
+            .body(requestBody)
         .when()
-                .put("/users/3")
+            .put("/users/3")
         .then()
-                .statusCode(200)
-                .body("name", equalTo("Alex Updated"))
-                .body("job", equalTo("Senior QA Engineer"))
-                .body("updatedAt", notNullValue());
+            .statusCode(200)
+            .body("name", equalTo("Alex Updated"))
+            .body("job", equalTo("Senior QA Engineer"))
+            .body("updatedAt", notNullValue());
     }
 
     @Test
     public void deleteUser() {
         given()
         .when()
-                .delete("/users/3")
+            .delete("/users/3")
         .then()
-                .statusCode(204);
+            .statusCode(204);
+    }
+
+    @Test
+    public void createUserAndVerify() {
+        Map<String, Object> requestBody = Map.of(
+                "name", "Alex",
+                "job", "QA Engineer"
+        );
+
+        String userId = given()
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+        .when()
+            .post("/users")
+        .then()
+            .statusCode(201)
+            .extract()
+            .path("id");
+
+
+        System.out.println("Created user with ID: " + userId);
+
+        assert userId != null : "User ID should not be null";
+        assert !userId.isEmpty() : "User ID should not be empty";
+    }
+
+    @Test
+    public void getFirstUserFromListAndVerify() {
+        int firstUserId = given()
+            .when()
+                .get("/users?page=1")
+            .then()
+                .statusCode(200)
+                .extract()
+                .path("data[0].id");
+
+        given()
+        .when()
+            .get("/users/" + firstUserId)
+        .then()
+            .statusCode(200)
+            .body("data.id", equalTo(firstUserId));
     }
 }
