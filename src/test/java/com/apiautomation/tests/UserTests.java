@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.*;
 public class UserTests extends BaseTest {
 
     @Test
-    public void getUserById() {
+    public void shouldReturnUserWhenValidIdProvided() {
         given()
         .when()
             .get("/users/2")
@@ -25,7 +25,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void getUserNotFound() {
+    public void shouldReturn404WhenUserDoesNotExist() {
         given()
         .when()
             .get("/users/999")
@@ -34,7 +34,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void getUsersList() {
+    public void shouldReturnPagedListOfUsers() {
         given()
             .queryParam("page", 2)
         .when()
@@ -47,7 +47,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void createUser() {
+    public void shouldCreateUserAndReturnCreatedStatus() {
         Map<String, Object> requestBody = Map.of(
                 "name", "Alex",
                 "job", "QA Engineer"
@@ -67,7 +67,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void updateUser() {
+    public void shouldUpdateUserAndReturnUpdatedFields() {
         Map<String, Object> requestBody = Map.of(
                 "name", "Alex Updated",
                 "job", "Senior QA Engineer"
@@ -86,7 +86,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void deleteUser() {
+    public void shouldDeleteUserAndReturnNoContent() {
         given()
         .when()
             .delete("/users/3")
@@ -95,7 +95,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void createUserAndVerify() {
+    public void shouldReturnGeneratedIdWhenUserIsCreated() {
         Map<String, Object> requestBody = Map.of(
                 "name", "Alex",
                 "job", "QA Engineer"
@@ -119,7 +119,7 @@ public class UserTests extends BaseTest {
     }
 
     @Test
-    public void getFirstUserFromListAndVerify() {
+    public void shouldFetchUserSuccessfullyWhenIdExtractedFromList() {
         int firstUserId = given()
             .when()
                 .get("/users?page=1")
