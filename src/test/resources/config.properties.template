@@ -2,6 +2,7 @@ base.uri=https://reqres.in
 base.path=/api
 reqres.env=prod
 user.agent=restassured-api-tests/1.0
+request.delay.ms=500
 
 # Required for ReqRes requests. Do not commit a real key in config.properties.
 api.key=YOUR_REQRES_API_KEY

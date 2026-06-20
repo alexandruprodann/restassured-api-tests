@@ -73,6 +73,8 @@
                 <configuration>
                     <failIfNoSpecifiedTests>true</failIfNoSpecifiedTests>
                     <failIfNoTests>true</failIfNoTests>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
         </plugins>

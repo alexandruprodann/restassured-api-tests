@@ -25,6 +25,7 @@ jobs:
       BASE_PATH: /api
       REQRES_ENV: prod
       USER_AGENT: restassured-api-tests/github-actions
+      REQUEST_DELAY_MS: 500
 
     steps:
       - name: Checkout repository

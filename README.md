@@ -45,6 +45,7 @@ base.uri=https://reqres.in
 base.path=/api
 reqres.env=prod
 user.agent=restassured-api-tests/1.0
+request.delay.ms=500
 api.key=YOUR_REQRES_API_KEY
 login.email=YOUR_LOGIN_EMAIL
 login.password=YOUR_LOGIN_PASSWORD
@@ -61,6 +62,7 @@ Configuration can also be provided as Java system properties or environment vari
 | `base.path` | `BASE_PATH` |
 | `reqres.env` | `REQRES_ENV` |
 | `user.agent` | `USER_AGENT` |
+| `request.delay.ms` | `REQUEST_DELAY_MS` |
 
 ## Run Tests Locally
 

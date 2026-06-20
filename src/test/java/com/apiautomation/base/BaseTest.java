@@ -4,6 +4,7 @@ import com.apiautomation.utils.ConfigReader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
@@ -18,5 +19,10 @@ public class BaseTest {
                         "user.agent",
                         "restassured-api-tests/1.0"))
                 .build();
+    }
+
+    @BeforeMethod
+    public void throttleRequests() throws InterruptedException {
+        Thread.sleep(Long.parseLong(ConfigReader.getOrDefault("request.delay.ms", "500")));
     }
 }
