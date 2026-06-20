@@ -88,9 +88,9 @@ Add these repository secrets before enabling CI:
 
 | Secret | Used as |
 | --- | --- |
-| `REQRES_API_KEY` | `API_KEY` |
-| `REQRES_LOGIN_EMAIL` | `LOGIN_EMAIL` |
-| `REQRES_LOGIN_PASSWORD` | `LOGIN_PASSWORD` |
+| `API_KEY` | `API_KEY` |
+| `LOGIN_EMAIL` | `LOGIN_EMAIL` |
+| `LOGIN_PASSWORD` | `LOGIN_PASSWORD` |
 
 Workflow file: `.github/workflows/api-tests.yml`
 
