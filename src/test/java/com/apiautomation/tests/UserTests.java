@@ -2,6 +2,7 @@ package com.apiautomation.tests;
 
 import com.apiautomation.base.BaseTest;
 import io.restassured.http.ContentType;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -112,10 +113,8 @@ public class UserTests extends BaseTest {
             .path("id");
 
 
-        System.out.println("Created user with ID: " + userId);
-
-        assert userId != null : "User ID should not be null";
-        assert !userId.isEmpty() : "User ID should not be empty";
+        Assert.assertNotNull(userId, "User ID should not be null");
+        Assert.assertFalse(userId.isEmpty(), "User ID should not be empty");
     }
 
     @Test

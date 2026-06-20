@@ -1,3 +1,11 @@
-api.key=
-login.email=
-login.password=
+base.uri=https://reqres.in
+base.path=/api
+reqres.env=prod
+user.agent=restassured-api-tests/1.0
+
+# Required for ReqRes requests. Do not commit a real key in config.properties.
+api.key=YOUR_REQRES_API_KEY
+
+# ReqRes login fixture credentials for the auth tests.
+login.email=YOUR_LOGIN_EMAIL
+login.password=YOUR_LOGIN_PASSWORD

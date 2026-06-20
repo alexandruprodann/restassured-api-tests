@@ -15,8 +15,8 @@ public class AuthTests extends BaseTest {
     @Test
     public void shouldReturnTokenWhenCredentialsAreValid() {
         Map<String, Object> requestBody = Map.of(
-                "email", ConfigReader.get("login.email"),
-                "password", ConfigReader.get("login.password")
+                "email", ConfigReader.getRequired("login.email"),
+                "password", ConfigReader.getRequired("login.password")
         );
 
         given()
@@ -32,7 +32,7 @@ public class AuthTests extends BaseTest {
     @Test
     public void shouldReturn400WhenPasswordIsMissing() {
         Map<String, Object> requestBody = Map.of(
-                "email", ConfigReader.get("login.email")
+                "email", ConfigReader.getRequired("login.email")
         );
 
         given()
