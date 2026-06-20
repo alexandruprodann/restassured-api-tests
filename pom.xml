@@ -14,7 +14,7 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <rest-assured.version>5.5.0</rest-assured.version>
+        <rest-assured.version>6.0.0</rest-assured.version>
         <testng.version>7.9.0</testng.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jackson.version>2.17.0</jackson.version>

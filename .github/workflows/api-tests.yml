@@ -49,4 +49,4 @@ jobs:
           exit "$missing"
 
       - name: Run API tests
-        run: mvn -B test
+        run: bash ./mvnw -B test

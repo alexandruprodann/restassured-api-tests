@@ -65,13 +65,19 @@ Configuration can also be provided as Java system properties or environment vari
 ## Run Tests Locally
 
 ```bash
-mvn test
+./mvnw test
+```
+
+PowerShell:
+
+```powershell
+.\mvnw.cmd test
 ```
 
 Or without a local config file:
 
 ```bash
-mvn test -Dapi.key=YOUR_REQRES_API_KEY -Dlogin.email=YOUR_LOGIN_EMAIL -Dlogin.password=YOUR_LOGIN_PASSWORD
+./mvnw test -Dapi.key=YOUR_REQRES_API_KEY -Dlogin.email=YOUR_LOGIN_EMAIL -Dlogin.password=YOUR_LOGIN_PASSWORD
 ```
 
 ## GitHub Actions
